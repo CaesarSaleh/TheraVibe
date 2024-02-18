@@ -23,10 +23,17 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 export default function RootLayout({ children }) {
   return (
+    <>
+    <head>
+        <link rel="icon" href="icon.png" type="image/png" />
+        <title>TheraVibe.VR</title>
+
+    </head>
     <html lang="en">
     <UserProvider>
       <body>{children}</body>
     </UserProvider>
     </html>
+    </>
   );
 }
