@@ -1,9 +1,9 @@
 "use client"
-process.env.AUTH0_SECRET= process.env.NEXT_PUBLIC_AUTH0_SECRET
-process.env.AUTH0_BASE_URL= process.env.NEXT_PUBLIC_AUTH0_BASE_URL
-process.env.AUTH0_ISSUER_BASE_URL= process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL
-process.env.AUTH0_CLIENT_ID= process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID
-process.env.AUTH0_CLIENT_SECRET= process.env.NEXT_PUBLIC_AUTH0_CLIENT_SECRET
+process.env.AUTH0_SECRET= "17b07dc5aa1dc321bd5ad2756551ce76"
+process.env.AUTH0_BASE_URL= "https://thera-vibe.vercel.app/"
+process.env.AUTH0_ISSUER_BASE_URL= "https://dev-eh2d411sjri41pxp.us.auth0.com"
+process.env.AUTH0_CLIENT_ID= "bps17pfqgeEMrPXy9hcVf2IkjjSMLTRG"
+process.env.AUTH0_CLIENT_SECRET= "PDqpkwKF_1n9ZH-hcDIw11D7kYyNIaBAInck4S0lkP3q7S1896wtryPN4ulc8leZ"
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
