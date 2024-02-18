@@ -1,35 +1,21 @@
 "use client"
-import dotenv from 'dotenv';
-// dotenv.config({'DOTENV_KEY.'});
-process.env.AUTH0_SECRET='17b07dc5aa1dc321bd5ad2756551ce76'
-process.env.AUTH0_BASE_URL='https://localhost:3000'
-process.env.AUTH0_ISSUER_BASE_URL='https://dev-eh2d411sjri41pxp.us.auth0.com'
-process.env.AUTH0_CLIENT_ID='bps17pfqgeEMrPXy9hcVf2IkjjSMLTRG'
-process.env.AUTH0_CLIENT_SECRET='PDqpkwKF_1n9ZH-hcDIw11D7kYyNIaBAInck4S0lkP3q7S1896wtryPN4ulc8leZ'
+process.env.AUTH0_SECRET= process.env.NEXT_PUBLIC_AUTH0_SECRET
+process.env.AUTH0_BASE_URL= process.env.NEXT_PUBLIC_AUTH0_BASE_URL
+process.env.AUTH0_ISSUER_BASE_URL= process.env.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL
+process.env.AUTH0_CLIENT_ID= process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID
+process.env.AUTH0_CLIENT_SECRET= process.env.NEXT_PUBLIC_AUTH0_CLIENT_SECRET
 
 import React, { useEffect } from "react";
 import { useRouter } from 'next/navigation';
-// import { useHistory } from 'react-router-dom';
-
-import Main from "./main";
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 
+
 export default function Home() {
-  console.log(process.env)
-  
   const {user, error , isLoading} = useUser()
 
   const router = useRouter();
-  
-  const handleAuth = () => {
-    console.log('foo')
-    router.push('/api/auth/login');
-  }
-  const handleOut = () => {
-    router.push('/');
-  }
-  
+    
   if (error) {
     console.log(error.message)
     return (
@@ -89,15 +75,14 @@ export default function Home() {
         </div>
       </div>
     </div>
-    <button onClick={() => handleOut()}
+    {/* <button onClick={() => handleOut()}
       className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700"
     >
       Logout
-    </button>
+    </button> */}
+    <a href="/api/auth/logout">Logout</a>
   
   </div>
-  
-  
   
   ); 
   }
