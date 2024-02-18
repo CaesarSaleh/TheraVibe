@@ -1,16 +1,22 @@
 "use client"
+import dotenv from 'dotenv';
+// dotenv.config({'DOTENV_KEY.'});
+process.env.AUTH0_SECRET='17b07dc5aa1dc321bd5ad2756551ce76'
+process.env.AUTH0_BASE_URL='https://localhost:3000'
+process.env.AUTH0_ISSUER_BASE_URL='https://dev-eh2d411sjri41pxp.us.auth0.com'
+process.env.AUTH0_CLIENT_ID='bps17pfqgeEMrPXy9hcVf2IkjjSMLTRG'
+process.env.AUTH0_CLIENT_SECRET='PDqpkwKF_1n9ZH-hcDIw11D7kYyNIaBAInck4S0lkP3q7S1896wtryPN4ulc8leZ'
+
 import React, { useEffect } from "react";
 import { useRouter } from 'next/navigation';
 // import { useHistory } from 'react-router-dom';
 
 import Main from "./main";
 import { useUser } from '@auth0/nextjs-auth0/client';
-import dotenv from 'dotenv';
-dotenv.config();
 
 
 export default function Home() {
-
+  console.log(process.env)
   
   const {user, error , isLoading} = useUser()
 
@@ -24,17 +30,31 @@ export default function Home() {
     router.push('/');
   }
   
-  // if (error) {
-  //   return (
-  //     <div>
-  //       {error.message}
-  //     </div>
-  //   )
-  // }
+  if (error) {
+    console.log(error.message)
+    return (
+      <div>
+        <p>This is an error message cuz user auth is causing an error</p>{error.message}
+      </div>
+    )
+  }
 
-  
-    return (<div className="bg-white min-h-screen">
+  if (!user){
+    return(
+      <div>
+        <p>not logged in!</p>
+        <a href="/api/auth/login">Login</a>
+      </div>
+    )
+  } else if (isLoading){
+    return (
+      <div>loading</div>
+    )
+  } else{
+
+    return user && (<div className="bg-white min-h-screen">
     {/* Blurred background */}
+    <p style={{color: 'black'}}>{user.name}</p>
     <div className="absolute inset-0 z-0">
       <div
         className="absolute inset-0 z-0"
@@ -60,27 +80,25 @@ export default function Home() {
             TheraVibe.VR provides personalized psychological therapy. Embark on a transformative journey with our groundbreaking VR therapy experience. Tailored to your unique needs, our immersive sessions offer a safe and private space where you can freely express your thoughts and emotions. Customize your therapist's appearance and surroundings to create a comfortable environment that empowers you to confidently explore your vulnerabilities. With engaging activities designed to promote relaxation and personalized recommendations to foster positive thinking, our VR therapy is a powerful tool for self-discovery and growth. Say hello to a new era of therapy, where innovation meets compassion, and healing knows no bounds. 
           </p>
           <div className="mt-12 flex items-center justify-center gap-x-6">
-            <button onClick={() => handleAuth()}
+            {/* <button onClick={() => handleAuth()}
               className="rounded-md bg-indigo-600 px-4 py-3 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-              Get started
-            </button>
+              > */}
+              {/* Get started
+            </button> */}
           </div>
         </div>
       </div>
     </div>
-    <button onClick={handleOut}
+    <button onClick={() => handleOut()}
       className="bg-purple-600 text-white py-2 px-4 rounded hover:bg-purple-700"
     >
       Logout
     </button>
-
+  
   </div>
-
   
   
-  );
   
-
-  
+  ); 
+  }
 }
